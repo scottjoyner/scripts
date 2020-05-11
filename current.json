@@ -1,0 +1,88 @@
+{
+  "timestamp" : 1589221180333,
+  "context" : {
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/album/5ht7ItJgpBH7W6vJ5BqpPr"
+    },
+    "href" : "https://api.spotify.com/v1/albums/5ht7ItJgpBH7W6vJ5BqpPr",
+    "type" : "album",
+    "uri" : "spotify:album:5ht7ItJgpBH7W6vJ5BqpPr"
+  },
+  "progress_ms" : 24441,
+  "item" : {
+    "album" : {
+      "album_type" : "single",
+      "artists" : [ {
+        "external_urls" : {
+          "spotify" : "https://open.spotify.com/artist/6sFIWsNpZYqfjUpaCgueju"
+        },
+        "href" : "https://api.spotify.com/v1/artists/6sFIWsNpZYqfjUpaCgueju",
+        "id" : "6sFIWsNpZYqfjUpaCgueju",
+        "name" : "Carly Rae Jepsen",
+        "type" : "artist",
+        "uri" : "spotify:artist:6sFIWsNpZYqfjUpaCgueju"
+      } ],
+      "available_markets" : [ ],
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/album/5ht7ItJgpBH7W6vJ5BqpPr"
+      },
+      "href" : "https://api.spotify.com/v1/albums/5ht7ItJgpBH7W6vJ5BqpPr",
+      "id" : "5ht7ItJgpBH7W6vJ5BqpPr",
+      "images" : [ {
+        "height" : 640,
+        "url" : "https://i.scdn.co/image/ab67616d0000b27323093970489ba9394b5ad09f",
+        "width" : 640
+      }, {
+        "height" : 300,
+        "url" : "https://i.scdn.co/image/ab67616d00001e0223093970489ba9394b5ad09f",
+        "width" : 300
+      }, {
+        "height" : 64,
+        "url" : "https://i.scdn.co/image/ab67616d0000485123093970489ba9394b5ad09f",
+        "width" : 64
+      } ],
+      "name" : "EMOTION SIDE B",
+      "release_date" : "2016-08-26",
+      "release_date_precision" : "day",
+      "total_tracks" : 8,
+      "type" : "album",
+      "uri" : "spotify:album:5ht7ItJgpBH7W6vJ5BqpPr"
+    },
+    "artists" : [ {
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/artist/6sFIWsNpZYqfjUpaCgueju"
+      },
+      "href" : "https://api.spotify.com/v1/artists/6sFIWsNpZYqfjUpaCgueju",
+      "id" : "6sFIWsNpZYqfjUpaCgueju",
+      "name" : "Carly Rae Jepsen",
+      "type" : "artist",
+      "uri" : "spotify:artist:6sFIWsNpZYqfjUpaCgueju"
+    } ],
+    "available_markets" : [ ],
+    "disc_number" : 1,
+    "duration_ms" : 236533,
+    "explicit" : false,
+    "external_ids" : {
+      "isrc" : "USUM71605963"
+    },
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/track/5Nm32R9spCURiGw0MRMzyd"
+    },
+    "href" : "https://api.spotify.com/v1/tracks/5Nm32R9spCURiGw0MRMzyd",
+    "id" : "5Nm32R9spCURiGw0MRMzyd",
+    "is_local" : false,
+    "name" : "Cry",
+    "popularity" : 0,
+    "preview_url" : null,
+    "track_number" : 6,
+    "type" : "track",
+    "uri" : "spotify:track:5Nm32R9spCURiGw0MRMzyd"
+  },
+  "currently_playing_type" : "track",
+  "actions" : {
+    "disallows" : {
+      "resuming" : true
+    }
+  },
+  "is_playing" : true
+}

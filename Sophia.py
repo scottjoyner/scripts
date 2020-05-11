@@ -57,7 +57,7 @@ def worker():
 
 # Location of the main method
 if __name__ == "__main__":
-    
+
     # Create a custom logger
     logger = logging.getLogger(__name__)
     stenographer = logging.FileHandler('script.log')
@@ -65,14 +65,14 @@ if __name__ == "__main__":
     stenographer_format = logging.Formatter('%(asctime)s :  %(message)s')
     stenographer.setFormatter(stenographer_format)
     logger.addHandler(stenographer)
-    
+
     # Custom Logger for streaming data and debugging
     console = logging.StreamHandler()
     console_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     console.setFormatter(console_format)
-    console.setLevel(logging.ERROR)
+    #console.setLevel(logging.ERROR)
     logger.addHandler(console)
-    
+
 
     # Initalize the Queue
     q = queue.Queue()
@@ -80,8 +80,8 @@ if __name__ == "__main__":
     r = sr.Recognizer()
     # Start up the worker thread
     threading.Thread(target=worker, daemon=True).start()
-    
-    
+
+
     with sr.Microphone() as source:
         try:
             while True:  # repeatedly listen for phrases and put the resulting audio on the audio processing job queue
@@ -89,7 +89,7 @@ if __name__ == "__main__":
         except KeyboardInterrupt:  # allow Ctrl + C to shut down the program
             pass
         logger.error("This shit is over")
-        
+
 # Joins the threads when the programs execution has finanlly been complteted.
 q.join()
 
@@ -120,5 +120,6 @@ q.join()
 #        q.put(audio)
 
 # block until all tasks are done
+
 
 

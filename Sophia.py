@@ -85,7 +85,7 @@ if __name__ == "__main__":
     with sr.Microphone() as source:
         try:
             while True:  # repeatedly listen for phrases and put the resulting audio on the audio processing job queue
-                q.put(r.listen(source))
+                q.put(r.record(source, duration=10))
         except KeyboardInterrupt:  # allow Ctrl + C to shut down the program
             pass
         logger.error("This shit is over")

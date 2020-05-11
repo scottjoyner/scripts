@@ -3,7 +3,7 @@ import json
 headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer API_TOKEN',
+    'Authorization': 'Bearer API_KEY',
 }
 
 
@@ -30,16 +30,10 @@ def getCurrentSong():
 
 def changeVolume(volume, device_id):
     params = (
-        ('volume_percent', '10'),
-        ('device_id', 's'),
+        ('volume_percent', volume),
+        ('device_id', device_id),
     )
     response = requests.put('https://api.spotify.com/v1/me/player/volume', headers=headers, params=params)
+    
+    
 
-
-
-
-
-#NB. Original query string below. It seems impossible to parse and
-#reproduce query strings 100% accurately so the one below is given
-#in case the reproduced version is not "correct".
-# response = requests.put('https://api.spotify.com/v1/me/player/volume?volume_percent=10&device_id=s', headers=headers)

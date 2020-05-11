@@ -10,13 +10,8 @@ import logging
 
 
 # Create a custom logger
+
 logger = logging.getLogger(__name__)
-
-# Create handlers
-
-# Dictates all the words to the script log
-# INFO level
-
 stenographer = logging.FileHandler('script.log')
 stenographer.setLevel(logging.ERROR)
 stenographer_format = logging.Formatter('%(asctime)s :  %(message)s')
@@ -151,11 +146,10 @@ def get_audio():
     try:
 
         text = rObject.recognize_google(audio, language ='en-US')
-        if text == 0:
-            
-        logger.error('%s', text)
-        print("You : ", text)
-        return text
+        if text != 0:
+            logger.error('%s', text)
+            print("You : ", text)
+            return text
 
     except:
         
@@ -170,18 +164,16 @@ if __name__ == "__main__":
     #assistant_speaks("Hello, " + name + '.')
 
     while(1):
-
+        logger.error("Dictation Started")
         #assistant_speaks("What can i do for you?")
         text = get_audio().lower()
 
-        if text == 0:
-            continue
-
-        if "exit" in str(text) or "bye" in str(text) or "sleep" in str(text):
-            assistant_speaks("Ok bye, "+ name+'.')
-            break
+        if text != 0:
+            if "exit" in str(text) or "bye" in str(text) or "sleep" in str(text):
+                logger.error("Dictation Ended")
+                break
 
         # calling process text to process the query
-        process_text(text)
+        #process_text(text)
         
         

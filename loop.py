@@ -71,7 +71,7 @@ class Pipeline:
     
     
 
-if __name__ == "__main__":
+
     print("Start")
     format = "%(asctime)s: %(message)s"
     logging.basicConfig(format=format, level=logging.INFO,

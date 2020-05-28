@@ -110,15 +110,18 @@ class Point:
 		self.Y = point[1]
 		self.Z = point[2]
 		self.distance = dist
-		
+
 
 graph = nx.Graph()
 
 for x in listed_points:
-	graph.add_node(x)
+	point = Point(x)
+	graph.add_node(point)
 
-nn = nx.k_nearest_neighbors(graph)
-print(nn)
+nx.draw(graph)
+plt.show()
+# nn = nx.k_nearest_neighbors(graph)
+# print(nn)
 
 # if x[0] == 0:
 # 			print()

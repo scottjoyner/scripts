@@ -1,13 +1,30 @@
 import requests, json
 from requests.exceptions import HTTPError
 import math
+import logging
 from matplotlib import pyplot as plt
+import http.client as http_client
+import urllib
+
+# urllib.urlretrieve('ftp://server/path/to/file', 'file')
+
+
+# def downloadFile(url):
+# 	urllib.urlretrieve(url)
+# url = "ftp://rockyftp.cr.usgs.gov/vdelivery/Datasets/Staged/NED/LPC/projects/NC_MecklenburgCo_2007/las/tiled/NC_MecklenburgCo_2007_000603.zip"
+
+# downloadFile(url)
+# http_client.HTTPConnection.debuglevel = 0
+
+# logging.basicConfig()
+# logging.getLogger().setLevel(logging.DEBUG)
+# requests_log = logging.getLogger("requests.packages.urllib3")
+# requests_log.setLevel(logging.DEBUG)
+# requests_log.propagate = True
 
 # https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=5317%20Addington%20Ct%20Charlotte%20NC&locationType=rooftop&sourceCountry=USA&maxLocations=1&outFields=*&f=pjson
 
-# https://viewer.nationalmap.gov/tnmaccess/api/products?datasets=&bbox=-80.7800815%2C%2B35.034299%2C-80.7780815%2C35.036299&q=&prodFormats=LAS%2CLAZ&prodExtents=&dateType=dateCreated&start=&end=&polyCode=&polyType=&offset=&max=&outputFormat=JSON&version=1&_csrf=95af3dcf-8483-4fd0-942f-e1499457515a
-# https://viewer.nationalmap.gov/tnmaccess/api/products?datasets=&bbox=-80.7800815,+35.034299,-80.7780815,35.036299&q=&prodFormats=LAS,LAZ&prodExtents=&dateType=dateCreated&start=&end=&polyCode=&polyType=&offset=&max=&outputFormat=JSON&version=1&_csrf=95af3dcf-8483-4fd0-942f-e1499457515a
-
+# https://viewer.nationalmap.gov/tnmaccess/api/products?datasets=Lidar+Point+Cloud+%28LPC%29&bbox=-80.7800815%2C35.034299%2C-80.7780815%2C35.036299&q=&dateType=dateCreated&start=&end=&polyCode=&polyType=&offset=&max=&outputFormat=JSON&version=1&_csrf=793285aa-e367-451e-9703-41514effa09e
 def geocode(address, locations=1):
 	payload = {
         'SingleLine': address,
@@ -27,7 +44,7 @@ def geocode(address, locations=1):
 
 def findPointCloud(extent, format='LAS,LAZ'):
 	payload = {
-		'datasets': '',
+		'datasets': 'Lidar Point Cloud (LPC)',
 		'bbox': str(extent['xmin']) + ',' + str(extent['ymin']) + ',' + str(extent['xmax']) + ',' + str(extent['ymax']),
 		'q': '',
 		'prodFormats': format,
@@ -43,24 +60,32 @@ def findPointCloud(extent, format='LAS,LAZ'):
 		'version': '1',
 		'_csrf': '95af3dcf-8483-4fd0-942f-e1499457515a',
 	}
+	print(payload['bbox'])
 	try:
 		response = requests.get('https://viewer.nationalmap.gov/tnmaccess/api/products?', params=payload)
 	except HTTPError as e:
 		print("Something went wrong")
-
 	print(response.status_code)
-	# dataset_lists_dictionary = json.loads(response.text)
+	dataset_lists_dictionary = json.loads(response.text)
 	# print(dataset_lists_dictionary)
-	# return dataset_lists_dictionary
+	return dataset_lists_dictionary
 
+def url(extent):
 
+	url = "https://viewer.nationalmap.gov/tnmaccess/api/products?datasets=Lidar+Point+Cloud+%28LPC%29&bbox=-80.7800815%2C35.034299%2C-80.7780815%2C35.036299&q=&dateType=dateCreated&start=&end=&polyCode=&polyType=&offset=&max=&outputFormat=JSON&version=1&_csrf=1fabdb22-6872-42ea-b909-8078f6aaeeff"
 
 # def listDir():
 # 	response = requests.get('rockyftp.cr.usgs.gov/vdelivery/Datasets/Staged/NED/LPC/projects/')
-# 	print(response.text)	
+# 	print(response.text)
 
 # geocode_dictionary = geocode('5317 addington Ct charlotte NC')
-# findPointCloud(geocode_dictionary['candidates'][0]['extent'])
+# pointcloud_dictionary = findPointCloud(geocode_dictionary['candidates'][0]['extent'])
+
+# print(pointcloud_dictionary["messages"])
+# for item in pointcloud_dictionary['items']:
+# 	print(item['title'] + ": " + item['downloadURL'])
+
+
 
 def truncate(n, decimals=0):
     multiplier = 10 ** decimals
@@ -86,15 +111,15 @@ x = inFile.X - inFile.header.min[0]
 y = inFile.Y - inFile.header.min[1]
 color = inFile.Z - inFile.header.min[2]
 print(color)
-print(x)
-print(y)
-# dataset = np.vstack([inFile.X, inFile.Y, inFile.Z]).transpose()
-# for x in dataset:
-# 	x = np.subtract(x, min)
+print(len(x))
+print(len(y))
+dataset = np.vstack([inFile.X, inFile.Y, inFile.Z]).transpose()
+for x in dataset:
+	x = np.subtract(x, min)
 
-# plt.scatter(x, y, s=5, c=color)
+plt.scatter(x, y, s=5, c=color)
 
-# plt.show()
+plt.show()
 #translated_dataset = np.subtract(dataset, np.array(inFile.header.min))
 # print(dataset)
 # dataset.transpose()
@@ -115,9 +140,9 @@ bbox = {
 "maxY": 35.042186
 }
 extent = {
-'xmin': -80.7799555, 
-'ymin': 35.03434400000001, 
-'xmax': -80.77795549999999, 
+'xmin': -80.7799555,
+'ymin': 35.03434400000001,
+'xmax': -80.77795549999999,
 'ymax': 35.03634400000001
 }
 
@@ -143,7 +168,7 @@ def preparePointCloud(extent, bbox, las_File_Path):
 	print(bbox_diff_x / diff[0])
 	print(bbox_diff_y / diff[1])
 	return 0
-preparePointCloud(extent, bbox, las_File_Path)	
+# preparePointCloud(extent, bbox, las_File_Path)
 
 def translatePoints():
 	return 0

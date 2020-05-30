@@ -96,14 +96,18 @@ extent = {
 }
 
 las_File_Path = "./home.las"
-radius = 100
+radius = 500
 points = preparePointCloud(extent, bbox, las_File_Path, latlng, radius)
 
 listed_points = points.transpose()
 
+print(listed_points)
+plt.scatter(listed_points[0], listed_points[1], c=listed_points[2])
+plt.show()
 # 2D graph of nodes
 # plt.scatter(listed_points[0], listed_points[1], s=5, c=listed_points[2])
 # plt.show()
+
 class Point:
 	def __init__(point, dist):
 		self.X = point[0]
@@ -112,14 +116,14 @@ class Point:
 		self.distance = dist
 
 
-graph = nx.Graph()
+# graph = nx.Graph()
 
-for x in listed_points:
-	point = Point(x)
-	graph.add_node(point)
+# for x in listed_points:
+# 	point = Point(x)
+# 	graph.add_node(point)
 
-nx.draw(graph)
-plt.show()
+# nx.draw(graph)
+# plt.show()
 # nn = nx.k_nearest_neighbors(graph)
 # print(nn)
 

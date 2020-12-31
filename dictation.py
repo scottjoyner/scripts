@@ -158,10 +158,10 @@ def get_audio():
 
 # Driver Code
 if __name__ == "__main__":
-    #assistant_speaks("What's your name, Human?")
-    #name ='Human'
-    #name = get_audio()
-    #assistant_speaks("Hello, " + name + '.')
+    assistant_speaks("What's your name, Human?")
+    name ='Human'
+    name = get_audio()
+    assistant_speaks("Hello, " + name + '.')
 
     while(1):
         logger.error("Dictation Started")
